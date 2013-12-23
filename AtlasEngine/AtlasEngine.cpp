@@ -87,6 +87,7 @@ void AtlasEngine::shutdown() {
 
 	// release the opengl object
 	if(opengl) {
+		opengl->shutdown(hwnd);
 		delete opengl;
 		opengl = 0;
 	}
@@ -181,6 +182,7 @@ bool AtlasEngine::initializeWindows(OpenGLClass* ogl, int& width, int& height) {
 	WNDCLASSEX wc;
 	DEVMODE dmscreensettings;
 	int posX, posY;
+	bool result;
 
 	// get external pointer to this object
 	ApplicationHandle = this;
@@ -216,6 +218,14 @@ bool AtlasEngine::initializeWindows(OpenGLClass* ogl, int& width, int& height) {
 
 	// dont show the window
 	ShowWindow(hwnd, SW_HIDE);
+
+	// initialize temporary opengl window to load extensions
+	result = opengl->initializeExtensions(hwnd);
+	if(!result)
+	{
+		MessageBox(hwnd, L"Failed to initialize the OpenGL extensions", L"Error", MB_OK);
+		return false;
+	}
 
 	// release the temporary window
 	DestroyWindow(hwnd);
@@ -253,11 +263,21 @@ bool AtlasEngine::initializeWindows(OpenGLClass* ogl, int& width, int& height) {
 	}
 
 	// create window
-	hwnd = CreateWindowEx(WS_EX_APPWINDOW, appName, appName, WS_POPUP,
+	// OVERLAPPED - for a window with border & controls
+	// POPUP - for a window without border
+	hwnd = CreateWindowEx(WS_EX_APPWINDOW, appName, appName, WS_OVERLAPPEDWINDOW,
 		posX, posY, width, height, NULL, NULL, hinstance, NULL);
 
 	if(hwnd == NULL)
 		return false;
+
+	// initialize opengl now
+	result = opengl->initializeOpenGL(hwnd, width, height, SCREEN_DEPTH, SCREEN_NEAR, VSYNC_ENABLED);
+	if(!result)
+	{
+		MessageBox(hwnd, L"Failed to initialize OpenGL, make sure your video card supports OpenGL4.0", L"Error", MB_OK);
+		return false;
+	}
 
 	// bring the window up on the screen and focus
 	ShowWindow(hwnd, SW_SHOW);

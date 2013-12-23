@@ -48,6 +48,9 @@
     <ClCompile Include="OpenGLClass.cpp">
       <Filter>Source Files\EngineComponents</Filter>
     </ClCompile>
+    <ClCompile Include="AtlasIO.cpp">
+      <Filter>Source Files\EngineComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AtlasEngine.h">
@@ -60,6 +63,9 @@
       <Filter>Header Files\EngineComponents</Filter>
     </ClInclude>
     <ClInclude Include="AtlasGraphics.h">
+      <Filter>Header Files\EngineComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="AtlasIO.h">
       <Filter>Header Files\EngineComponents</Filter>
     </ClInclude>
   </ItemGroup>

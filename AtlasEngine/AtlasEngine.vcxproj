@@ -79,6 +79,7 @@
     <ClCompile Include="AtlasEngine.cpp" />
     <ClCompile Include="AtlasGraphics.cpp" />
     <ClCompile Include="AtlasInput.cpp" />
+    <ClCompile Include="AtlasIO.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OpenGLClass.cpp" />
   </ItemGroup>
@@ -86,6 +87,7 @@
     <ClInclude Include="AtlasEngine.h" />
     <ClInclude Include="AtlasGraphics.h" />
     <ClInclude Include="AtlasInput.h" />
+    <ClInclude Include="AtlasIO.h" />
     <ClInclude Include="OpenGLClass.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

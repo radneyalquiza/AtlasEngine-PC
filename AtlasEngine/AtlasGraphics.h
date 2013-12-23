@@ -27,6 +27,7 @@ private:
 	bool render();
 
 private:
+	OpenGLClass* opengl;
 };
 
 
